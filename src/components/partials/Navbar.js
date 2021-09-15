@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 export class Navbar extends Component {
   constructor(props) {
@@ -14,7 +14,6 @@ export class Navbar extends Component {
   render() {
     return (
       <>
-        <Router>
           <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
 
@@ -27,7 +26,7 @@ export class Navbar extends Component {
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <Link tp="/login" class="nav-link">Connection</Link>
+                    <Link to="/login" class="nav-link">Connection</Link>
                   </li>
                   <li class="nav-item">
                     <Link to="/register" class="nav-link">Inscription</Link>
@@ -37,7 +36,6 @@ export class Navbar extends Component {
 
             </div>
           </nav>
-        </Router>
       </>
     )
   }

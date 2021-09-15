@@ -1,10 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router } from 'react-router-dom'
 
-import AppRouter from './components/router/AppRouter';
-import Welcome from './components/Welcome'
-import Home from './components/Home'
-
+import AppRouter from './components/router/AppRouter'
 
 function App() {
   return (

@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 import Navbar from '../partials/Navbar'
+import { Redirect } from 'react-router-dom'
 
 export class Register extends Component {
   constructor(props) {
@@ -8,8 +10,9 @@ export class Register extends Component {
     this.state = {
        pseudo: "",
        email: "",
-       pwd: "",
-       pwdConfirm: ""
+       password: "",
+       password_confirmation: "",
+       redirect: false
     }
   }
 
@@ -25,24 +28,44 @@ export class Register extends Component {
     })
   }
 
-  handlePwdChange = event => {
-    this.setState({ pwd: event.target.value }, () => {
+  handlePasswordChange = event => {
+    this.setState({ password: event.target.value }, () => {
       console.log(this.state)
     })
   }
 
-  handlePwdConfirmChange = event => {
-    this.setState({ pwdConfirm: event.target.value }, () => {
+  handlePasswordConfirmationChange = event => {
+    this.setState({ password_confirmation: event.target.value }, () => {
       console.log(this.state)
     })
   }
 
   handleSubmit = event => {
     event.preventDefault()
-    console.log('inscription')
+    
+    // Permet de creer un objet FormData avec des headers défini par default
+    let bodyFormData = new FormData()
+    bodyFormData.set('pseudo', this.state.pseudo)
+    bodyFormData.set('email', this.state.email)
+    bodyFormData.set('password', this.state.password)
+    bodyFormData.set('password_confirmation', this.state.password_confirmation)
+
+    axios.post('http://api.lareact.test/api/register', bodyFormData)
+      .then(res => {
+        sessionStorage.setItem('token', res.data.api_token)
+        this.setState({ redirect: true })
+      })
+      .catch(error => {
+        console.log(error.response)
+      })
   }
   
   render() {
+
+    if (this.state.redirect) {
+      return <Redirect to="/" />
+    }
+
     return (
       <>
         <Navbar />
@@ -52,19 +75,31 @@ export class Register extends Component {
           <form method="POST" onSubmit={ this.handleSubmit }>
             <div className="mb-3">
               <label htmlFor="pseudo" className="form-label">Pseudo</label>
-              <input type="text" className="form-control" id="pseudo" onChange={ this.handlePseudoChange } />
+              <input type="text" className="form-control" name="pseudo" id="pseudo" onChange={ this.handlePseudoChange } />
             </div>
             <div className="mb-3">
               <label htmlFor="email" className="form-label">Adresse email</label>
-              <input type="email" className="form-control" id="email" aria-describedby="emailHelp" onChange={ this.handleEmailChange } />
+              <input type="email" className="form-control" name="email" id="email" aria-describedby="emailHelp" onChange={ this.handleEmailChange } />
             </div>
             <div className="mb-3">
-              <label htmlFor="pwd" className="form-label">Mot de passe</label>
-              <input type="password" className="form-control" id="pwd" onChange={ this.handlePwdChange } />
+              <label htmlFor="password" className="form-label">Mot de passe</label>
+              <input 
+                type="password" 
+                className="form-control" 
+                name="password" 
+                id="password" 
+                onChange={ this.handlePasswordChange } 
+              />
             </div>
             <div className="mb-3">
-              <label htmlFor="pwd-confirm" className="form-label">Confirmation du mot de passe</label>
-              <input type="password" className="form-control" id="pwd-confirm" onChange={ this.handlePwdConfirmChange } />
+              <label htmlFor="password_confirmation " className="form-label">Confirmation du mot de passe</label>
+              <input 
+                type="password" 
+                className="form-control" 
+                name="password_confirmation" 
+                id="password_confirmation " 
+                onChange={ this.handlePasswordConfirmationChange } 
+              />
             </div>
             <button type="submit" className="btn btn-primary">M'inscrire</button>
           </form>

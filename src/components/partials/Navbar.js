@@ -1,14 +1,19 @@
 import React, { Component } from 'react'
 
-import { Link } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
 
 export class Navbar extends Component {
   constructor(props) {
     super(props)
   
     this.state = {
-       
+       token: null
     }
+  }
+
+  logout = () => {
+    sessionStorage.removeItem('token')
+    this.setState({ token: null })
   }
   
   render() {
@@ -33,7 +38,7 @@ export class Navbar extends Component {
                         <Link to="/pictures/new" className="nav-link">Poster une photo</Link>
                       </li>
                       <li className="nav-item">
-                        <Link to="/register" className="nav-link">Deconnexion</Link>
+                        <button className="btn" onClick={ this.logout }>Deconnexion</button>
                       </li>
                     </>
                     :

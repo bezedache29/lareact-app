@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { Component } from 'react'
 import Navbar from '../partials/Navbar'
 
@@ -33,7 +34,30 @@ export class CreatePicture extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    console.log('upload')
+    
+    let bodyFormData = new FormData()
+    bodyFormData.set('title', this.state.title)
+    bodyFormData.set('description', this.state.description)
+    bodyFormData.set('image', this.state.image)
+
+    let headers = {
+      headers: {
+        'API-TOKEN': sessionStorage.getItem('token')
+      }
+    }
+
+    axios.post('http://api.lareact.test/api/pictures', bodyFormData, headers)
+      .then(res => {
+        console.log(res.data)
+      })
+      .catch(error => {
+        if (error.response.status === 401) {
+          this.setState({ errors: error.response.data.errors }, () => {
+            console.log(this.state.errors)
+          })
+        }
+        console.log(error.response)
+      })
   }
   
   render() {

@@ -7,16 +7,21 @@ export class Navbar extends Component {
     super(props)
   
     this.state = {
-       token: null
+       redirect: false
     }
   }
 
   logout = () => {
     sessionStorage.removeItem('token')
-    this.setState({ token: null })
+    this.setState({ redirect: true })
   }
   
   render() {
+
+    if (this.state.redirect) {
+      return <Redirect to="/" />
+    }
+
     return (
       <>
           <nav className="navbar navbar-expand-lg navbar-light bg-light">

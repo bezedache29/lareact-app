@@ -16,10 +16,65 @@ export class Home extends Component {
       <>
         <Navbar />
 
-        <div class="h-100 p-5 text-white bg-dark rounded-3 m-2">
-          <h2>Change the background</h2>
-          <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then, mix and match with additional component themes and more.</p>
-          <button class="btn btn-outline-light" type="button">Example button</button>
+        <div className="container">
+          <div className="row mt-3 justify-content-center">
+            <div class="card m-2" style={{ width: '350px' }}>
+              <img src="https://lesjoiesducode.fr/content/044/froid-android-studio-meme-developpeur.jpg" class="card-img-top" alt="..." />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+            <div class="card m-2" style={{ width: '350px' }}>
+              <img src="https://lesjoiesducode.fr/content/044/froid-android-studio-meme-developpeur.jpg" class="card-img-top" alt="..." />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+            <div class="card m-2" style={{ width: '350px' }}>
+              <img src="https://lesjoiesducode.fr/content/044/froid-android-studio-meme-developpeur.jpg" class="card-img-top" alt="..." />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+            <div class="card m-2" style={{ width: '350px' }}>
+              <img src="https://lesjoiesducode.fr/content/044/froid-android-studio-meme-developpeur.jpg" class="card-img-top" alt="..." />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+            <div class="card m-2" style={{ width: '350px' }}>
+              <img src="https://lesjoiesducode.fr/content/044/froid-android-studio-meme-developpeur.jpg" class="card-img-top" alt="..." />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+            <div class="card m-2" style={{ width: '350px' }}>
+              <img src="https://lesjoiesducode.fr/content/044/froid-android-studio-meme-developpeur.jpg" class="card-img-top" alt="..." />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+            <div class="card m-2" style={{ width: '350px' }}>
+              <img src="https://lesjoiesducode.fr/content/044/froid-android-studio-meme-developpeur.jpg" class="card-img-top" alt="..." />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
         </div>
       </>
     )

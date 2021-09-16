@@ -35,7 +35,7 @@ export class Navbar extends Component {
                     ?
                     <>
                       <li className="nav-item">
-                        <Link to="/pictures/new" className="nav-link">Poster une photo</Link>
+                        <Link to="/pictures/create" className="nav-link">Poster une photo</Link>
                       </li>
                       <li className="nav-item">
                         <button className="btn" onClick={ this.logout }>Deconnexion</button>

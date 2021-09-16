@@ -15,6 +15,12 @@ export class Login extends Component {
     }
   }
 
+  componentDidMount() {
+    if (sessionStorage.getItem('token')) {
+      this.setState({ redirect: true })
+    }
+  }
+
   handleEmailChange = event => {
     this.setState({ email: event.target.value }, () => {
       console.log(this.state)

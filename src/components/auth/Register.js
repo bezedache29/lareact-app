@@ -17,6 +17,12 @@ export class Register extends Component {
     }
   }
 
+  componentDidMount() {
+    if (sessionStorage.getItem('token')) {
+      this.setState({ redirect: true })
+    }
+  }
+
   handlePseudoChange = event => {
     this.setState({ pseudo: event.target.value }, () => {
       console.log(this.state)

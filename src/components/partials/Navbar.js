@@ -25,12 +25,27 @@ export class Navbar extends Component {
 
               <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                  <li className="nav-item">
-                    <Link to="/login" className="nav-link">Connection</Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link to="/register" className="nav-link">Inscription</Link>
-                  </li>
+                  { 
+                    sessionStorage.getItem('token') 
+                    ?
+                    <>
+                      <li className="nav-item">
+                        <Link to="/pictures/new" className="nav-link">Poster une photo</Link>
+                      </li>
+                      <li className="nav-item">
+                        <Link to="/register" className="nav-link">Deconnexion</Link>
+                      </li>
+                    </>
+                    :
+                    <>
+                      <li className="nav-item">
+                        <Link to="/login" className="nav-link">Connection</Link>
+                      </li>
+                      <li className="nav-item">
+                        <Link to="/register" className="nav-link">Inscription</Link>
+                      </li>
+                    </>
+                  }
                 </ul>
               </div>
 

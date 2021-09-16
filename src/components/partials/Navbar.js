@@ -14,22 +14,22 @@ export class Navbar extends Component {
   render() {
     return (
       <>
-          <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
+          <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <div className="container-fluid">
 
-              <Link to="/" class="navbar-brand">Lareact</Link>
+              <Link to="/" className="navbar-brand">Lareact</Link>
 
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+              <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
               </button>
 
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <Link to="/login" class="nav-link">Connection</Link>
+              <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+                  <li className="nav-item">
+                    <Link to="/login" className="nav-link">Connection</Link>
                   </li>
-                  <li class="nav-item">
-                    <Link to="/register" class="nav-link">Inscription</Link>
+                  <li className="nav-item">
+                    <Link to="/register" className="nav-link">Inscription</Link>
                   </li>
                 </ul>
               </div>

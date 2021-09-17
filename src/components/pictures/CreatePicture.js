@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { Component } from 'react'
 import Navbar from '../partials/Navbar'
+import { Redirect } from 'react-router-dom'
 
 export class CreatePicture extends Component {
   constructor(props) {
@@ -10,7 +11,8 @@ export class CreatePicture extends Component {
        title: "",
        description: "",
        image: "",
-       errors: []
+       errors: [],
+       redirect: false
     }
   }
 
@@ -48,7 +50,7 @@ export class CreatePicture extends Component {
 
     axios.post('http://api.lareact.test/api/pictures', bodyFormData, headers)
       .then(res => {
-        console.log(res.data)
+        this.setState({ redirect: true })
       })
       .catch(error => {
         if (error.response.status === 401) {
@@ -61,6 +63,11 @@ export class CreatePicture extends Component {
   }
   
   render() {
+
+    if (this.state.redirect) {
+      return <Redirect to="/" />
+    }
+
     return (
       <>
         <Navbar />
@@ -100,6 +107,7 @@ export class CreatePicture extends Component {
               type="file" 
               id="image"
               />
+              { this.state.errors.image ? <div className="text-danger">{ this.state.errors.image }</div> : '' }
             </div>
             
             <button type="submit" className="btn btn-primary">Ajouter l'image</button>

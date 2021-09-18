@@ -52,7 +52,7 @@ export class Home extends Component {
         this.setState({ pictures: res.data })
       })
       .catch(error => {
-        console.log(error.message)
+        console.log(error.response)
       })
   }
   
@@ -66,7 +66,7 @@ export class Home extends Component {
             <form className="form-inline my-2 my-lg-0 mx-2" method="POST" onSubmit={ this.handleSubmit } >
               <input 
                 type="search" 
-                className="form-control me-sm-2" 
+                className="form-control me-sm-2"
                 name="search" 
                 placeholder="Rechercher un article..." 
                 onChange={ this.handleSearchChange}

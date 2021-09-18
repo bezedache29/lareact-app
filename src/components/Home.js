@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 import Navbar from './partials/Navbar'
 
@@ -32,13 +33,15 @@ export class Home extends Component {
             {
               this.state.pictures.map(picture => {
                 return (
-                  <div class="col-4">
-                    <div className="card mx-2 my-3">
-                      <img src={ `http://api.lareact.test/storage/${picture.image}` } class="card-img-top" alt="..." />
-                      <div class="card-body">
-                        <h5 class="card-title">{ picture.title }</h5>
-                        <p class="card-text">{ picture.description }</p>
-                        <a href="#" class="btn btn-primary">En savoir plus</a>
+                  <div className="col-4" key={ picture.id }>
+                    <div className="card mx-2 my-3" style={{ minHeight: "600px" }}>
+                      <img src={ `http://api.lareact.test/storage/${picture.image}` } className="card-img-top" alt="..." />
+                      <div className="card-body row flex-column">
+                        <h5 className="card-title">{ picture.title }</h5>
+                        <p className="card-text text-truncate">{ picture.description }</p>
+                        <div className="mt-auto">
+                          <Link to={`/pictures/${picture.id}`} className="btn btn-primary">En savoir plus</Link>
+                        </div>
                       </div>
                     </div>
                   </div>

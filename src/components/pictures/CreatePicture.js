@@ -73,11 +73,11 @@ export class CreatePicture extends Component {
         <Navbar />
         
         <div className="w-50 mx-auto">
-          <h2 className="my-3 text-center">Ajouter une photo</h2>
+          <h2 className="my-3 text-center">Ajouter un article</h2>
           <form method="POST" onSubmit={ this.handleSubmit } encType="multipart/form-data">
           
             <div className="mb-3">
-              <label htmlFor="title" className="form-label">Titre de la photo</label>
+              <label htmlFor="title" className="form-label">Titre de l'article</label>
               <input 
                 type="text" 
                 className={ `form-control ${this.state.errors.title ? 'is-invalid' : ''}` } 
@@ -88,7 +88,7 @@ export class CreatePicture extends Component {
             </div>
 
             <div className="mb-3">
-              <label htmlFor="description" className="form-label">Description de la photo</label>
+              <label htmlFor="description" className="form-label">Description de l'article'</label>
               <textarea 
                 id="description" 
                 cols="30" 
@@ -110,7 +110,7 @@ export class CreatePicture extends Component {
               { this.state.errors.image ? <div className="text-danger">{ this.state.errors.image }</div> : '' }
             </div>
             
-            <button type="submit" className="btn btn-primary">Ajouter l'image</button>
+            <button type="submit" className="btn btn-primary">Créer l'article</button>
             
           </form>
         </div>

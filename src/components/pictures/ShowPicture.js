@@ -108,11 +108,11 @@ export class ShowPicture extends Component {
                     this.state.like
                     ?
                     <>
-                      <Favorite onClick={ this.handleLike } /> Je n'aime plus
+                      <Favorite onClick={ this.handleLike } style={{ cursor: 'pointer' }} /> Je n'aime plus
                     </>
                     :
                     <>
-                      <FavoriteBorder onClick={ this.handleLike } /> J'aime
+                      <FavoriteBorder onClick={ this.handleLike } style={{ cursor: 'pointer' }} /> J'aime
                     </>
                   }
                 </div>

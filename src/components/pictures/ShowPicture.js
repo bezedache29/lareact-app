@@ -5,6 +5,8 @@ import Navbar from '../partials/Navbar'
 import AppLoader from '../loader/AppLoader'
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder'
 import { Favorite } from '@material-ui/icons'
+import { CSSTransition } from 'react-transition-group'
+import Modal from 'react-modal'
 
 export class ShowPicture extends Component {
   constructor(props) {
@@ -15,7 +17,10 @@ export class ShowPicture extends Component {
       picture: {},
       errors: [],
       redirect: false,
-      like: false
+      like: false,
+      showMessage: false,
+      showContainer: true,
+      isOpen: false
     }
   }
 
@@ -80,6 +85,28 @@ export class ShowPicture extends Component {
         console.log(error.response)
       })
   }
+
+  usersLiked = () => {
+    let headers = {
+      headers: {
+        'API-TOKEN': sessionStorage.getItem('token')
+      }
+    }
+
+    axios.get(this.state.apiUrl + this.props.match.params.id +'/usersLiked', headers)
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(error => {
+        console.log(error.response)
+      })
+  }
+
+  toggleModal = () => {
+    this.setState(prevState => ({
+      isOpen: !prevState.isOpen,
+    }));
+  };
   
   render() {
 
@@ -102,6 +129,9 @@ export class ShowPicture extends Component {
               <div className="col-6">
                 <div className="author">
                   <h2>{ this.state.picture.title }</h2>
+
+                  <button className="btn btn-info my-2" onClick={ this.toggleModal }>Voir les personnes ayant liké cet article</button>
+
                   <p>{ this.state.picture.description }</p>
                   <h4>Auteur : <span className="badge bg-secondary">{ this.state.picture.user.pseudo }</span></h4>
                   {
@@ -117,6 +147,31 @@ export class ShowPicture extends Component {
                   }
                 </div>
               </div>
+              <CSSTransition
+                in={ this.state.isOpen }
+                timeout={300}
+                classNames="alert"
+                unmountOnExit
+                onEnter={() => this.setState({ showContainer: false })}
+                onExited={() => this.setState({ showContainer: true })}
+              >
+                <Modal
+                  closeTimeoutMS={500}
+                  isOpen={ this.state.isOpen }
+                >
+                  <div className="">
+                    <button type="button" class="btn-close float-end me-2" aria-label="Close" onClick={ this.toggleModal }></button>
+                    <h2 className="text-center">Personnes ayant aimé cet article :</h2>
+                    <ul class="list-group mt-5 w-50 mx-auto">
+                      <li class="list-group-item">An item</li>
+                      <li class="list-group-item">A second item</li>
+                      <li class="list-group-item">A third item</li>
+                      <li class="list-group-item">A fourth item</li>
+                      <li class="list-group-item">And a fifth one</li>
+                    </ul>
+                  </div>
+                </Modal>
+              </CSSTransition>
             </div>
             :
             <div className="text-center">

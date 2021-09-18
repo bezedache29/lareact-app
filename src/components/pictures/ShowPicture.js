@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import Navbar from '../partials/Navbar'
 import AppLoader from '../loader/AppLoader'
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder'
+import { Favorite } from '@material-ui/icons'
 
 export class ShowPicture extends Component {
   constructor(props) {
@@ -12,7 +14,8 @@ export class ShowPicture extends Component {
       apiUrl: 'http://api.lareact.test/api/pictures/',
       picture: {},
       errors: [],
-      redirect: false
+      redirect: false,
+      like: false
     }
   }
 
@@ -30,7 +33,7 @@ export class ShowPicture extends Component {
       axios.get(this.state.apiUrl + id, headers)
       .then(res => {
         this.setState({ picture: res.data }, () => {
-          console.log(this.state.picture);
+          this.checkLike()
         })
       })
       .catch(error => {
@@ -44,6 +47,38 @@ export class ShowPicture extends Component {
     } else {
       this.setState({ redirect: true })
     }
+  }
+
+  checkLike = () => {
+    let headers = {
+      headers: {
+        'API-TOKEN': sessionStorage.getItem('token')
+      }
+    }
+
+    axios.get(this.state.apiUrl + this.props.match.params.id +'/checklike', headers)
+      .then(res => {
+        this.setState({ like: res.data })
+      })
+      .catch(error => {
+        console.log(error.response)
+      })
+  }
+
+  handleLike = () => {
+    let headers = {
+      headers: {
+        'API-TOKEN': sessionStorage.getItem('token')
+      }
+    }
+
+    axios.get(this.state.apiUrl + this.props.match.params.id +'/handlelike', headers)
+      .then(res => {
+        this.checkLike()
+      })
+      .catch(error => {
+        console.log(error.response)
+      })
   }
   
   render() {
@@ -68,7 +103,18 @@ export class ShowPicture extends Component {
                 <div className="author">
                   <h2>{ this.state.picture.title }</h2>
                   <p>{ this.state.picture.description }</p>
-                  <h4>Auteur : <span class="badge bg-secondary">{ this.state.picture.user.pseudo }</span></h4>
+                  <h4>Auteur : <span className="badge bg-secondary">{ this.state.picture.user.pseudo }</span></h4>
+                  {
+                    this.state.like
+                    ?
+                    <>
+                      <Favorite onClick={ this.handleLike } /> Je n'aime plus
+                    </>
+                    :
+                    <>
+                      <FavoriteBorder onClick={ this.handleLike } /> J'aime
+                    </>
+                  }
                 </div>
               </div>
             </div>

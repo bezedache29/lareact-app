@@ -11,7 +11,7 @@ export class ShowPicture extends Component {
     super(props)
   
     this.state = {
-      apiUrl: 'http://api.lareact.test/api/pictures/',
+      apiUrl: 'https://lareact-api.ripley.eu/api/pictures/',
       picture: {},
       errors: [],
       redirect: false,
@@ -130,7 +130,7 @@ export class ShowPicture extends Component {
             ?
             <div className="row">
               <div className="col-6">
-                <img className="img-fluid" src={`http://api.lareact.test/storage/${ this.state.picture.image }`} alt="" />
+                <img className="img-fluid" src={`https://lareact-api.ripley.eu/storage/${ this.state.picture.image }`} alt="" />
               </div>
               <div className="col-6">
                 <div className="author">

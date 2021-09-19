@@ -48,7 +48,7 @@ export class CreatePicture extends Component {
       }
     }
 
-    axios.post('http://api.lareact.test/api/pictures', bodyFormData, headers)
+    axios.post('https://lareact-api.ripley.eu/api/pictures', bodyFormData, headers)
       .then(res => {
         this.setState({ redirect: true })
       })

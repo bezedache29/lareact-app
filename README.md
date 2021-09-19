@@ -16,6 +16,7 @@
 - Axios
 - Material/ui
 - React Loader Spinner
+- React social login button
 
 ## Lien Online
 [Lareact](https://lareact.ripley.eu)

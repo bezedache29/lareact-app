@@ -15,7 +15,7 @@ export class Home extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://api.lareact.test/api/pictures')
+    axios.get('https://lareact-api.ripley.eu/api/pictures')
       .then(res => {
         this.setState({ pictures: res.data })
       })
@@ -47,7 +47,7 @@ export class Home extends Component {
     let bodyFormData = new FormData()
     bodyFormData.set('search', this.state.search)
 
-    axios.post('http://api.lareact.test/api/pictures/search', bodyFormData)
+    axios.post('https://lareact-api.ripley.eu/api/pictures/search', bodyFormData)
       .then(res => {
         this.setState({ pictures: res.data })
       })
@@ -79,7 +79,7 @@ export class Home extends Component {
                 return (
                   <div className="col-4" key={ picture.id }>
                     <div className="card mx-2 my-3" style={{ minHeight: "600px" }}>
-                      <img src={ `http://api.lareact.test/storage/${picture.image}` } className="card-img-top" alt="..." />
+                      <img src={ `https://lareact-api.ripley.eu/storage/${picture.image}` } className="card-img-top" alt="..." />
                       <div className="card-body row flex-column">
                         <h5 className="card-title">{ picture.title }</h5>
                         <p className="card-text text-truncate">{ picture.description }</p>

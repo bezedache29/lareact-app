@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import Navbar from '../partials/Navbar'
+import { GoogleLoginButton } from 'react-social-login-buttons'
 
 export class Login extends Component {
   constructor(props) {
@@ -40,7 +41,7 @@ export class Login extends Component {
     bodyFormData.set('email', this.state.email)
     bodyFormData.set('password', this.state.password)
 
-    axios.post('http://api.lareact.test/api/login', bodyFormData)
+    axios.post('https://lareact-api.ripley.eu/api/login', bodyFormData)
       .then(res => {
         console.log(res.data)
         sessionStorage.setItem('token', res.data.api_token)
@@ -98,6 +99,11 @@ export class Login extends Component {
             <button type="submit" className="btn btn-primary">Me connecter</button>
             
           </form>
+        </div>
+        <div className="d-flex justify-content-center mt-5">
+          <a href="https://lareact-api.ripley.eu/auth/redirect/google">
+            <GoogleLoginButton style={{ maxWidth: 400, minWidth: 300 }} />
+          </a>
         </div>
       </>
     )

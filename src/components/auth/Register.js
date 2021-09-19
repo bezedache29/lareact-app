@@ -57,7 +57,7 @@ export class Register extends Component {
     bodyFormData.set('password', this.state.password)
     bodyFormData.set('password_confirmation', this.state.password_confirmation)
 
-    axios.post('http://api.lareact.test/api/register', bodyFormData)
+    axios.post('https://lareact-api.ripley.eu/api/register', bodyFormData)
       .then(res => {
         sessionStorage.setItem('token', res.data.api_token)
         this.setState({ redirect: true })

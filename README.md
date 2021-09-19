@@ -1,4 +1,4 @@
-# App web permettant de créer des articles de les lister et de les liker
+# App web permettant de créer, lister et liker des articles
 
 ## Mis en place
 

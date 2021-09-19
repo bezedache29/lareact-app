@@ -5,8 +5,6 @@ import Navbar from '../partials/Navbar'
 import AppLoader from '../loader/AppLoader'
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder'
 import { Favorite } from '@material-ui/icons'
-import { CSSTransition } from 'react-transition-group'
-import Modal from 'react-modal'
 
 export class ShowPicture extends Component {
   constructor(props) {
@@ -18,9 +16,7 @@ export class ShowPicture extends Component {
       errors: [],
       redirect: false,
       like: false,
-      showMessage: false,
-      showContainer: true,
-      isOpen: false
+      users: []
     }
   }
 
@@ -102,11 +98,21 @@ export class ShowPicture extends Component {
       })
   }
 
-  toggleModal = () => {
-    this.setState(prevState => ({
-      isOpen: !prevState.isOpen,
-    }));
-  };
+  serchUsersLiked = () => {
+    let headers = {
+      headers: {
+        'API-TOKEN': sessionStorage.getItem('token')
+      }
+    }
+
+    axios.get(this.state.apiUrl + this.props.match.params.id +'/users-liked-articles', headers)
+      .then(res => {
+        this.setState({ users: res.data })
+      })
+      .catch(error => {
+        console.log(error.response)
+      })
+  }
   
   render() {
 
@@ -130,7 +136,15 @@ export class ShowPicture extends Component {
                 <div className="author">
                   <h2>{ this.state.picture.title }</h2>
 
-                  <button className="btn btn-info my-2" onClick={ this.toggleModal }>Voir les personnes ayant liké cet article</button>
+                  <button 
+                    type="button" 
+                    className="btn btn-primary my-4" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#usersLikedPicture"
+                    onClick={ this.serchUsersLiked }
+                  >
+                    Voir les personnes ayant liké cet article
+                  </button>
 
                   <p>{ this.state.picture.description }</p>
                   <h4>Auteur : <span className="badge bg-secondary">{ this.state.picture.user.pseudo }</span></h4>
@@ -147,31 +161,41 @@ export class ShowPicture extends Component {
                   }
                 </div>
               </div>
-              <CSSTransition
-                in={ this.state.isOpen }
-                timeout={300}
-                classNames="alert"
-                unmountOnExit
-                onEnter={() => this.setState({ showContainer: false })}
-                onExited={() => this.setState({ showContainer: true })}
-              >
-                <Modal
-                  closeTimeoutMS={500}
-                  isOpen={ this.state.isOpen }
-                >
-                  <div className="">
-                    <button type="button" class="btn-close float-end me-2" aria-label="Close" onClick={ this.toggleModal }></button>
-                    <h2 className="text-center">Personnes ayant aimé cet article :</h2>
-                    <ul class="list-group mt-5 w-50 mx-auto">
-                      <li class="list-group-item">An item</li>
-                      <li class="list-group-item">A second item</li>
-                      <li class="list-group-item">A third item</li>
-                      <li class="list-group-item">A fourth item</li>
-                      <li class="list-group-item">And a fifth one</li>
-                    </ul>
+
+              {/* Modal */}
+              <div className="modal fade" id="usersLikedPicture" tabIndex="-1" aria-labelledby="usersLikedPictureLabel" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="usersLikedPictureLabel">Liste des personnes ayant aimé cet article</h5>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body">
+                      {
+                        this.state.users
+                        ?
+                        <ul>
+                          { 
+                            this.state.users.map(user => {
+                              return (
+                                  <li key={user.id}>{ user.pseudo }</li>
+                              )
+                            })
+                          }
+                        </ul>
+                        :
+                        <div className="text-center">
+                          <AppLoader />
+                        </div>
+                      }
+                    </div>
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Fermer</button>
+                    </div>
                   </div>
-                </Modal>
-              </CSSTransition>
+                </div>
+              </div>
+
             </div>
             :
             <div className="text-center">
